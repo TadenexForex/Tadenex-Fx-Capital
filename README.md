@@ -1,36 +1,61 @@
 
+from flask import Flask, render_template, request, redirect, url_for
+import pandas as pd
+import numpy as np
 
-<html>
-  <head>
-    <title>Tadenex Forex Capital Login</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-  </head>
-  <body>
-    <div class="container">
-      <h2>Tadenex Forex Capital Login</h2>
-      <form action="login.php" method="POST">
-        <div class="form-group">
-          <label for="username">Username:</label>
-          <input type="text" class="form-control" id="username" name="username" required>
-        </div>
-        <div class="form-group">
-          <label for="password">Password:</label>
-          <input type="password" class="form-control" id="password" name="password" required>
-        </div>
-        <button type="submit" class="btn btn-primary">Login</button>
-      </form>
-    </div>
-  </body>
-</html>
-<html>
-  <head>
-    <title>Tadenex Forex Capital</title>
-  </head>
-  <body>
+app = Flask(__name__)
+app.secret_key = 'secret'
+
+# Load data
+df = pd.read_csv('investment_data.csv')
+
+# Define routes
+@app.route('/')
+def home():
+    return render_template('home.html')
+
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    if request.method == 'POST':
+        username = request.form['username']
+        password = request.form['password']
+
+        if username == 'admin' and password == 'admin':
+            session['logged_in'] = True
+            return redirect(url_for('recommend'))
+        else:
+            return render_template('login.html', error=True)
+
+    return render_template('login.html', error=False)
+
+@app.route('/logout')
+def logout():
+    session['logged_in'] = False
+    return redirect(url_for('home'))
+
+@app.route('/recommend', methods=['GET', 'POST'])
+def recommend():
+    if not session.get('logged_in'):
+        return redirect(url_for('login'))
+
+    # Get user input
+    age = int(request.form['age'])
+    income = float(request.form['income'])
+    risk_tolerance = request.form['risk_tolerance']
+
+    # Filter data based on user input
+    filtered_df = df[(df['Age'] <= age) & (df['Income'] <= income) & (df['Risk Tolerance'] == risk_tolerance)]
+
+    # Calculate recommended investment based on filtered data
+    recommended_investment = filtered_df.groupby('Investment Type')['Expected Return'].max().idxmax()
+
+    # Render recommendation template with recommended investment
+    return render_template('recommendation.html', investment=recommended_investment)
+
+if __name__ == '__main__':
+    app.run(debug=True)
+
+  <html>
     <header>
       <h1>Tadenex Forex Capital</h1>
       <nav>
@@ -47,18 +72,6 @@
         <h2>About Us</h2>
 <html>
    <head>
-      <html>
-//@version=5
-indicator("Forex Trading Chart", overlay=true)
-
-// Get the forex data
-forex_data = request.security("FX:EURUSD", timeframe.period, close)
-
-// Plot the forex data as a line chart
-plot(forex_data, title="EUR/USD", color=color.blue, linewidth=2)
-
-</html>
-<img src="/storage/emulated/0/Pictures/Screenshots/Screenshot_20230423-182037~2.jpg" alt=" trading chart">
         <p>Welcome to Tadenex Forex Capital, your trusted partner in the foreign exchange market. We provide reliable and efficient forex trading services to help you achieve your investment goals. Our team of experts is dedicated to delivering top-notch financial solutions to our clients.</p>
       </section>
       <section>
