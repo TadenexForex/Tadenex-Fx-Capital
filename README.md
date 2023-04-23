@@ -50,6 +50,7 @@
       <script type="text/javascript" src="https://unpkg.com/lightweight-charts@3.0.2/dist/lightweight-charts.standalone.production.js"></script>
    </head>
    <body>
+<https://unpkg.com/lightweight-charts@3.0.2/dist/lightweight-charts.standalone.production.js<
       <div id="chart"></div>
       <script type="text/javascript">
          const chart = LightweightCharts.createChart(document.getElementById('chart'), {
