@@ -118,7 +118,13 @@ plot(forex_data, title="EUR/USD", color=color.blue, linewidth=2)
         </li>
         <li>
           <h3>Advanced</h3>
-          <p>Investment: $10,000 - $49,999</p>
+          <p>Investment:$100-1000$
+200$-2000$
+300-3000$
+400$-4000$
+500$-5000$
+600$-6000$
+ $10,000 - $49,999</p>
           <p>ROI: 7.5%</p>
           <p>Duration: 60 days</p>
         </li>
