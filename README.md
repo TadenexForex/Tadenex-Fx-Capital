@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+
 <html>
   <head>
     <title>Tadenex Forex Capital - Login</title>
@@ -18,8 +18,6 @@
     </form>
   </body>
 </html>
-# Tadenex-Fx-Capital
-<!DOCTYPE html>
 <html>
   <head>
     <title>Tadenex Forex Capital - Home</title>
@@ -93,7 +91,7 @@
   </body>
 </html>
 ni
-<!DOCTYPE html>
+
 <html lang="en">
 <head>
   <meta charset="UTF-8">
