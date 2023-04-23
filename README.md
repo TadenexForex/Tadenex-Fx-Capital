@@ -58,7 +58,7 @@ forex_data = request.security("FX:EURUSD", timeframe.period, close)
 plot(forex_data, title="EUR/USD", color=color.blue, linewidth=2)
 
 </html>
-
+<img src="/storage/emulated/0/Pictures/Screenshots/Screenshot_20230423-182037~2.jpg" alt=" trading chart">
         <p>Welcome to Tadenex Forex Capital, your trusted partner in the foreign exchange market. We provide reliable and efficient forex trading services to help you achieve your investment goals. Our team of experts is dedicated to delivering top-notch financial solutions to our clients.</p>
       </section>
       <section>
