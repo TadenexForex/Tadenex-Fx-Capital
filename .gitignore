@@ -1,1 +1,56 @@
-*.skb
+from flask import Flask, render_template, request, redirect, url_for
+import pandas as pd
+import numpy as np
+
+app = Flask(__name__)
+app.secret_key = 'secret'
+
+# Load data
+df = pd.read_csv('investment_data.csv')
+
+# Define routes
+@app.route('/')
+def home():
+    return render_template('home.html')
+
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    if request.method == 'POST':
+        username = request.form['username']
+        password = request.form['password']
+
+        if username == 'admin' and password == 'admin':
+            session['logged_in'] = True
+            return redirect(url_for('recommend'))
+        else:
+            return render_template('login.html', error=True)
+
+    return render_template('login.html', error=False)
+
+@app.route('/logout')
+def logout():
+    session['logged_in'] = False
+    return redirect(url_for('home'))
+
+@app.route('/recommend', methods=['GET', 'POST'])
+def recommend():
+    if not session.get('logged_in'):
+        return redirect(url_for('login'))
+
+    # Get user input
+    age = int(request.form['age'])
+    income = float(request.form['income'])
+    risk_tolerance = request.form['risk_tolerance']
+
+    # Filter data based on user input
+    filtered_df = df[(df['Age'] <= age) & (df['Income'] <= income) & (df['Risk Tolerance'] == risk_tolerance)]
+
+    # Calculate recommended investment based on filtered data
+    recommended_investment = filtered_df.groupby('Investment Type')['Expected Return'].max().idxmax()
+
+    # Render recommendation template with recommended investment
+    return render_template('recommendation.html', investment=recommended_investment)
+
+if __name__ == '__main__':
+    app.run(debug=True)
+
