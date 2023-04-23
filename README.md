@@ -47,7 +47,7 @@
       <section>
         <h2>About Us</h2>
 <img src="website" alt="website" width="500" height="300" class="website">
-
+https://www.tradingview.com/chart/
         <p>Welcome to Tadenex Forex Capital, your trusted partner in the foreign exchange market. We provide reliable and efficient forex trading services to help you achieve your investment goals. Our team of experts is dedicated to delivering top-notch financial solutions to our clients.</p>
       </section>
       <section>
