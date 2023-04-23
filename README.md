@@ -47,30 +47,16 @@
         <h2>About Us</h2>
 <html>
    <head>
-      <script type="text/javascript" src="https://unpkg.com/lightweight-charts@3.0.2/dist/lightweight-charts.standalone.production.js"></script>
-   </head>
-   <body>
-<https://unpkg.com/lightweight-charts@3.0.2/dist/lightweight-charts.standalone.production.js<
-      <div id="chart"></div>
-      <script type="text/javascript">
-         const chart = LightweightCharts.createChart(document.getElementById('chart'), {
-            width: 600,
-            height: 300,
-         });
-         const candlestickSeries = chart.addCandlestickSeries();
-         const socket = new WebSocket('wss://api.example.com/streaming');
-         socket.addEventListener('message', function(event) {
-            const data = JSON.parse(event.data);
-            candlestickSeries.update({
-               time: data.timestamp,
-               open: data.open,
-               high: data.high,
-               low: data.low,
-               close: data.close,
-            });
-         });
-      </script>
-   </body>
+      <html>
+//@version=5
+indicator("Forex Trading Chart", overlay=true)
+
+// Get the forex data
+forex_data = request.security("FX:EURUSD", timeframe.period, close)
+
+// Plot the forex data as a line chart
+plot(forex_data, title="EUR/USD", color=color.blue, linewidth=2)
+
 </html>
 
         <p>Welcome to Tadenex Forex Capital, your trusted partner in the foreign exchange market. We provide reliable and efficient forex trading services to help you achieve your investment goals. Our team of experts is dedicated to delivering top-notch financial solutions to our clients.</p>
