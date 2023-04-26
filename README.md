@@ -184,3 +184,30 @@ if __name__ == '__main__':
     <main>
       <h2>Our Mission</h2>
       <p>Our mission is to help our clients achieve their financial goals by providing them with the best investment opportunities in the market
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Payment Page</title>
+    <link rel="stylesheet" type="text/css" href="payment.css">
+  </head>
+  <body>
+    <div class="container">
+      <h1>Payment Details</h1>
+      <form>
+        <label for="name">Name on Card:</label>
+        <input type="text" id="name" name="name" required>
+
+        <label for="cardNumber">Card Number:</label>
+        <input type="text" id="cardNumber" name="cardNumber" required>
+
+        <label for="expDate">Expiration Date:</label>
+        <input type="text" id="expDate" name="expDate" placeholder="MM/YY" required>
+
+        <label for="cvv">CVV:</label>
+        <input type="text" id="cvv" name="cvv" required>
+
+        <input type="submit" value="Submit Payment">
+      </form>
+    </div>
+  </body>
+</html>
